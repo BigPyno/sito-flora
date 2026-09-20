@@ -327,7 +327,9 @@ p  { margin: 0 0 18px; }
 .dark { background: var(--blu-notte); color: #fff; }
 .dark h2 { color: #fff; }
 .dark-grid { display: grid; grid-template-columns: .85fr repeat(4, 1fr); gap: clamp(22px, 3vw, 40px); align-items: start; }
-.dark-title .kicker { color: #ff8b92; }
+/* sul blu notte l'occhiello usa il rosso di marca, con peso 700 per restare leggibile */
+.dark-title .kicker,
+.specialisti .kicker { color: var(--rosso); font-weight: 700; }
 .dark-title img { width: min(100%, 230px); height: auto; }
 .dark-title i { display: block; width: 46px; height: 4px; background: var(--rosso); margin-top: 18px; }
 /* Le icone SVG sono già nel rosso del marchio: niente filtri, il colore resta esatto */
