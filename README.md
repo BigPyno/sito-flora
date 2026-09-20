@@ -58,5 +58,6 @@ pieno la richiesta viene scartata silenziosamente.
   Per tenerne traccia servono Netlify Blobs o un foglio esterno.
 - **PDF del catalogo**: non è nel repo, per scelta. Il brief vieta il download
   diretto: va inviato dall'azienda o servito con un link firmato a scadenza.
-- **Segnaposto da sostituire**: foto della sezione storia, icone dei settori
-  aeronautico e ferroviario, testi di Privacy e Cookie Policy.
+- **Segnaposto da sostituire**: la prima foto della sezione storia (lo sticker) —
+  si cambia in `build.py`, lista `foto` dentro `home()`; icone dei settori
+  aeronautico e ferroviario; testi di Privacy e Cookie Policy.

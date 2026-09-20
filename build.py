@@ -148,11 +148,6 @@ def footer(p=""):
         <img class="footer-logo" src="{p}assets/img/logo-corar-bianco.png" alt="CORAR" width="168" height="36">
         <p class="footer-about">Componenti oleodinamici di qualità per l'industria, l'agricoltura e la
           movimentazione. Affidabilità, competenza e passione dal 1990.</p>
-        <div class="social">
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.54-1.5h1.66V3.6c-.29-.04-1.28-.13-2.43-.13-2.4 0-4.05 1.47-4.05 4.16V9.9H7.5V13h2.72v8z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.92 3.93 2.42 7.15 2.27 8.42 2.21 8.8 2.2 12 2.2zm0 3.1a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4zm0 11.05a4.35 4.35 0 1 1 0-8.7 4.35 4.35 0 0 1 0 8.7zm6.96-11.32a1.56 1.56 0 1 1-3.12 0 1.56 1.56 0 0 1 3.12 0z"/></svg></a>
-        </div>
       </div>
       <div>
         <h5>Prodotti</h5>
@@ -228,11 +223,8 @@ def sezione_catalogo(p="", chiaro=False):
     return f"""<section class="{cls}" id="catalogo">
   <div class="wrap catalogo-grid">
     <div class="book reveal">
-      <div class="book-cover">
-        <img class="bk-logo" src="{p}assets/img/logo-corar.png" alt="" width="128" height="72">
-        <div class="bk-disc"><img src="{p}assets/img/nipples-e-adattatori.webp" alt="" loading="lazy"></div>
-        <span class="bk-t">Catalogo<em>Componenti</em>Oleodinamici</span>
-      </div>
+      <img src="{p}assets/img/catalogo-cover.webp" alt="Copertina del catalogo prodotti CORAR"
+           width="700" height="860" loading="lazy">
     </div>
     <div class="reveal" data-delay="1">
       <p class="kicker {'kicker--blu' if chiaro else 'kicker--chiaro'}">Catalogo CORAR</p>
@@ -275,9 +267,16 @@ def home():
     tl_html = "".join(
         f'<div class="tl-item reveal" data-delay="{i}"><strong>{a}</strong><p>{t}</p></div>'
         for i, (a, t) in enumerate(timeline))
+    # Le quattro foto seguono l'ordine della timeline qui sotto: 1990, 2000, 2010, Oggi.
+    # Per sostituire lo sticker con una foto vera basta cambiare il primo file di questa lista.
+    foto = [("storia-1990.webp", "Gli inizi di CORAR"),
+            ("storia-2000.webp", "Il magazzino CORAR"),
+            ("storia-2010.webp", "Tubi oleodinamici pronti alla spedizione"),
+            ("storia-oggi.webp", "La sede CORAR a Modugno")]
     foto_html = "".join(
-        f'<div class="foto-ph reveal" data-delay="{i}"><span>Foto {t}</span></div>'
-        for i, t in enumerate(["sede", "magazzino", "prodotti", "team"]))
+        f'<div class="foto-st reveal" data-delay="{i}">'
+        f'<img src="assets/img/{f}" alt="{a}" width="560" height="700" loading="lazy"></div>'
+        for i, (f, a) in enumerate(foto))
 
     settori_html = "".join(
         f'<div class="settore reveal" data-delay="{i%4}"><img src="assets/icons/{ic}" alt="" width="54" height="54" loading="lazy">'
@@ -297,8 +296,10 @@ def home():
             ("1-11.svg", "Spedizioni veloci", "Collaboriamo con i migliori corrieri per consegne rapide in tutta Italia ed Europa."),
             ("1-12.svg", "Supporto tecnico", "Il nostro team è sempre disponibile per consulenze e assistenza dedicata."),
             ("1-13.svg", "Esperienza consolidata", "Da oltre trent'anni al fianco di aziende e professionisti dell'oleodinamica.")]
+    # Le icone sono già nel rosso del marchio (#e20613): nessun filtro, nessuna approssimazione.
     plus_html = "".join(
-        f'<div class="plus reveal" data-delay="{i}"><img src="assets/icons/{ic}" alt="" width="42" height="42" loading="lazy">'
+        f'<div class="plus reveal" data-delay="{i}">'
+        f'<img src="assets/icons/{ic}" alt="" width="80" height="80" loading="lazy">'
         f'<strong>{t}</strong><p>{d}</p></div>' for i, (ic, t, d) in enumerate(plus))
 
     return (head("CORAR S.r.l. | Componenti oleodinamici per ogni settore industriale",
@@ -380,7 +381,7 @@ def home():
     <div class="wrap dark-grid">
       <div class="dark-title reveal">
         <p class="kicker">Perché scegliere</p>
-        <strong>CORAR</strong>
+        <img src="assets/img/logo-corar-bianco.png" alt="CORAR" width="260" height="56">
         <i></i>
       </div>
       {plus_html}
@@ -394,12 +395,12 @@ def home():
 
 # ----------------------------------------------------------------------- PRODOTTI
 def prodotti():
-    def card(c):
-        return f"""<a class="cat reveal" href="prodotti/{c['slug']}.html">
+    def card(c, big=False):
+        return f"""<a class="{'cat cat--big' if big else 'cat'} reveal" href="prodotti/{c['slug']}.html">
       <div class="cat-body"><h3>{c['nome']}</h3><span class="link-rosso">Scopri i prodotti {AR}</span></div>
       <div class="cat-img"><img src="assets/img/{c['slug']}.webp" alt="{c['nome']} CORAR" loading="lazy"></div>
     </a>"""
-    cards = "".join(card(c) for c in CATS)
+    cards = card(CATS[0], True) + "".join(card(c) for c in CATS[1:])
 
     punti = [("1-01.svg", "Prodotti selezionati<br>dei migliori marchi"),
              ("1-11.svg", "Disponibilità<br>e spedizioni rapide"),
@@ -583,53 +584,6 @@ def contatti():
         <iframe title="Mappa della sede CORAR a Modugno" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q={IND1.replace(' ', '+')},+{IND2.replace(' ', '+')}&amp;output=embed"></iframe>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap" style="max-width:840px">
-      <div class="section-head center reveal">
-        <p class="kicker">Scrivici</p>
-        <h2>Richiedi informazioni</h2>
-        <p>Compila il modulo: la richiesta viene inviata direttamente all'ufficio CORAR, che ti risponderà
-          nel più breve tempo possibile.</p>
-      </div>
-      <form data-mail="Richiesta informazioni dal sito" class="reveal" novalidate>
-        <div class="hp" aria-hidden="true">
-          <label>Non compilare questo campo
-                <input name="website" type="text" tabindex="-1" autocomplete="off">
-          </label>
-        </div>
-        <div class="form-grid">
-          <div class="field"><label for="f-nome">Nome e cognome *</label>
-            <input id="f-nome" name="nome" type="text" required autocomplete="name" placeholder="Mario Rossi"></div>
-          <div class="field"><label for="f-azienda">Azienda</label>
-            <input id="f-azienda" name="azienda" type="text" autocomplete="organization" placeholder="Ragione sociale"></div>
-          <div class="field"><label for="f-email">Email *</label>
-            <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="nome@azienda.it"></div>
-          <div class="field"><label for="f-tel">Telefono</label>
-            <input id="f-tel" name="telefono" type="tel" autocomplete="tel" placeholder="080 000 0000"></div>
-          <div class="field field--full"><label for="f-ogg">Oggetto della richiesta</label>
-            <select id="f-ogg" name="oggetto">
-              <option>Informazioni sui prodotti</option>
-              <option>Richiesta di preventivo</option>
-              <option>Supporto tecnico</option>
-              <option>Richiesta catalogo</option>
-              <option>Altro</option>
-            </select></div>
-          <div class="field field--full"><label for="f-msg">Messaggio *</label>
-            <textarea id="f-msg" name="messaggio" rows="5" required placeholder="Descrivi l'applicazione o i componenti che ti servono"></textarea></div>
-          <div class="field field--full">
-            <label class="consenso"><input type="checkbox" name="privacy" required>
-              <span>Ho letto la <a href="privacy.html">Privacy Policy</a> e acconsento al trattamento dei dati per rispondere alla richiesta. *</span>
-            </label>
-          </div>
-          <div class="field field--full">
-            <button class="btn btn--rosso btn--full" type="submit">Invia la richiesta {AR}</button>
-          </div>
-        </div>
-        <p class="form-msg" role="status"></p>
-      </form>
     </div>
   </section>
 
