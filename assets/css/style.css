@@ -470,10 +470,6 @@ input::placeholder, textarea::placeholder { color: #98a0b2; }
 .footer-cont { display: grid; gap: 11px; font-size: 16px; }
 .footer-cont li { display: flex; gap: 10px; align-items: flex-start; }
 .footer-cont img { width: 20px; height: 20px; flex: 0 0 20px; margin-top: 4px; filter: brightness(0) invert(1); opacity: .7; }
-.social { display: flex; gap: 12px; margin-top: 22px; }
-.social a { width: 40px; height: 40px; border-radius: 10px; background: rgba(255, 255, 255, .08); display: grid; place-items: center; }
-.social a:hover { background: var(--rosso); }
-.social svg { width: 18px; height: 18px; fill: #fff; }
 .footer-bottom {
   margin-top: clamp(36px, 4vw, 56px); border-top: 1px solid rgba(255, 255, 255, .12);
   padding: 22px 0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px;
