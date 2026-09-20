@@ -1,0 +1,26 @@
+# Configurazione del deploy su Netlify — sito vetrina CORAR
+
+[build]
+  command = "python3 build.py"
+  publish = "sito"
+  functions = "netlify/functions"
+
+# I moduli chiamano /api/invia, che gira sulla funzione serverless
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Cache lunga per immagini, icone, CSS e JavaScript (hanno nomi stabili:
+# dopo una modifica va fatto un deploy, che invalida la cache di Netlify)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
