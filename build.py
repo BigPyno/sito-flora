@@ -1,8 +1,19 @@
 # -*- coding: utf-8 -*-
 """Generatore statico del sito vetrina CORAR."""
-import os, html, pathlib
+import os, html, pathlib, hashlib
 
 OUT = pathlib.Path(__file__).parent / "sito"
+
+
+def _ver(rel):
+    """Firma breve del file: appesa all'URL, costringe il browser a riscaricarlo
+    quando il contenuto cambia. Senza, resta in cache anche dopo il deploy."""
+    f = OUT / rel
+    if not f.exists():
+        return "1"
+    return hashlib.md5(f.read_bytes()).hexdigest()[:8]
+
+
 EMAIL = "corar@corar.it"
 TEL = "080 532 9208"
 TEL_HREF = "+39080532 9208".replace(" ", "")
@@ -98,7 +109,7 @@ def head(titolo, descr, p=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{p}assets/css/style.css">
+<link rel="stylesheet" href="{p}assets/css/style.css?v={_ver('assets/css/style.css')}">
 </head>
 <body>
 """
@@ -180,7 +191,7 @@ def footer(p=""):
     </div>
   </div>
 </footer>
-<script src="{p}assets/js/main.js"></script>
+<script src="{p}assets/js/main.js?v={_ver('assets/js/main.js')}"></script>
 </body>
 </html>
 """
