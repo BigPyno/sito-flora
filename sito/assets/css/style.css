@@ -649,3 +649,31 @@ input::placeholder, textarea::placeholder { color: #98a0b2; }
   .site-footer a { display: inline-block; padding: 3px 0; }
   .footer-bottom a { padding: 6px 0; }
 }
+
+
+/* ==========================================================================
+   Fascia marchi: scorre da sola, ma resta consultabile anche senza animazioni
+   ========================================================================== */
+@media (max-width: 880px) {
+  /* su schermo stretto il giro è più corto: stessa velocità percepita */
+  .marquee-track { animation-duration: 30s; gap: 48px; }
+  .brand img { max-width: 168px; }
+}
+
+/* Se il telefono ha "Riduci movimento" attivo l'animazione viene disattivata
+   dal sistema: in quel caso la fascia diventa scorrevole col dito, così i
+   marchi restano tutti raggiungibili invece di fermarsi ai primi due. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .marquee::-webkit-scrollbar { height: 4px; }
+  .marquee::-webkit-scrollbar-thumb { background: var(--grigio-bordo); border-radius: 4px; }
+  .marquee-track { animation: none !important; gap: 44px; padding-inline: 4px; }
+  .marquee-track .brand { scroll-snap-align: center; }
+  /* la seconda copia serve solo all'animazione: senza, sarebbe un doppione */
+  .marquee-track .brand:nth-child(n+9) { display: none; }
+}
