@@ -64,7 +64,8 @@ p  { margin: 0 0 18px; }
   text-transform: uppercase; color: var(--rosso); margin: 0 0 14px;
 }
 .kicker--blu { color: var(--blu); }
-.kicker--chiaro { color: #ff8b92; }
+/* sul blu acceso della fascia catalogo il rosso non si leggerebbe: occhiello bianco */
+.kicker--chiaro, .catalogo .kicker--chiaro { color: #fff; }
 
 .lead { font-size: 18px; color: var(--testo-soft); max-width: 62ch; }
 .section-head { max-width: 760px; margin: 0 auto clamp(34px, 4vw, 56px); }
